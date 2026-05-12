@@ -19,27 +19,32 @@ import { useState } from "react";
 
 export default function Index() {
   const router = useRouter();
+
   const [email, setEmail] = useState<string>("");
   const [senha, setSenha] = useState<string>("");
 
   function verificationEmail(): boolean {
     const trimmedEmail = email.trim().toLowerCase();
+
     if (!trimmedEmail) {
-      Alert.alert("Digite um e-mail!");
+      Alert.alert("Atenção", "Digite um e-mail!");
       return false;
     }
+
     if (!trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
-      Alert.alert("Email inválido!");
+      Alert.alert("Atenção", "Email inválido!");
       return false;
     }
+
     return true;
   }
 
   function verificationPassword(): boolean {
     if (!senha) {
-      Alert.alert("Digite sua senha!");
+      Alert.alert("Atenção", "Digite sua senha!");
       return false;
     }
+
     return true;
   }
 
@@ -48,20 +53,31 @@ export default function Index() {
 
     switch (code) {
       case "auth/user-not-found":
-        return "Usuário não encontrado. Verifique o e-mail ou cadastre-se.";
+        return "Usuário não encontrado.";
+
       case "auth/wrong-password":
-        return "Senha incorreta. Tente novamente.";
+        return "Senha incorreta.";
+
       case "auth/invalid-email":
         return "O e-mail informado é inválido.";
+
       case "auth/network-request-failed":
-        return "Falha na conexão. Verifique sua internet e tente novamente.";
+        return "Falha na conexão. Verifique sua internet.";
+
+      case "auth/invalid-credential":
+        return "Email ou senha incorretos.";
+
+      case "auth/too-many-requests":
+        return "Muitas tentativas. Tente novamente mais tarde.";
+
       default:
-        return error?.message ?? "Erro desconhecido ao entrar.";
+        return "Erro ao fazer login.";
     }
   }
 
   async function handleLogin() {
     if (!verificationEmail()) return;
+
     if (!verificationPassword()) return;
 
     try {
@@ -71,10 +87,14 @@ export default function Index() {
         senha,
       );
 
-      Alert.alert("Login realizado!", logged.user.email ?? "");
+      console.log("Usuário logado:", logged.user);
+
+      Alert.alert("Sucesso", `Bem-vindo ${logged.user.email ?? ""}`);
+
       router.replace("/home");
     } catch (error: any) {
-      console.log("Erro no login: ", error);
+      console.log("Erro no login:", error);
+
       Alert.alert("Erro ao entrar", getFirebaseAuthErrorMessage(error));
     }
   }
@@ -82,7 +102,10 @@ export default function Index() {
   return (
     <KeyboardAvoidingView
       style={{ flex: 1 }}
-      behavior={Platform.select({ ios: "padding", android: "height" })}
+      behavior={Platform.select({
+        ios: "padding",
+        android: "height",
+      })}
     >
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
@@ -96,6 +119,7 @@ export default function Index() {
           />
 
           <Text style={styles.title}>Entrar</Text>
+
           <Text style={styles.subtitle}>
             Acesse sua conta com e-mail e senha
           </Text>
@@ -105,6 +129,7 @@ export default function Index() {
               placeholder="E-mail"
               keyboardType="email-address"
               autoCapitalize="none"
+              autoCorrect={false}
               value={email}
               onChangeText={setEmail}
             />
@@ -138,28 +163,37 @@ const styles = StyleSheet.create({
     backgroundColor: "#FDFDFD",
     padding: 32,
   },
+
   ilustration: {
     width: "100%",
     height: 330,
     resizeMode: "contain",
     marginTop: 62,
   },
+
   form: {
     marginTop: 24,
     gap: 12,
   },
+
   title: {
     fontSize: 32,
     fontWeight: "900",
+    color: "#121214",
   },
+
   subtitle: {
     fontSize: 16,
+    color: "#585860",
+    marginTop: 4,
   },
+
   footerText: {
     textAlign: "center",
     marginTop: 24,
     color: "#585860",
   },
+
   footerLink: {
     color: "#0929b8",
     fontWeight: "700",
