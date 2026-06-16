@@ -1,12 +1,12 @@
-import { Button } from "@/components/Button";
+﻿import { Button } from "@/components/Button";
 import { Input } from "@/components/Input";
+import { auth } from "@/lib/firebase";
+import { validarCadastro } from "@/validations/auth-validations";
 
 import { Link, useRouter } from "expo-router";
-import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
-
-import { auth } from "@/lib/firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
+import { Alert, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 
 export default function Signup() {
   const router = useRouter();
@@ -22,19 +22,7 @@ export default function Signup() {
       return false;
     }
     if (!trimmedEmail.includes("@") || !trimmedEmail.includes(".")) {
-      Alert.alert("Email inválido!");
-      return false;
-    }
-    return true;
-  }
-
-  function verificationPassword(): boolean {
-    if (!senha) {
-      Alert.alert("Digite uma senha!");
-      return false;
-    }
-    if (senha !== confirmarSenha) {
-      Alert.alert("As senhas não coincidem");
+      Alert.alert("Email invalido!");
       return false;
     }
     return true;
@@ -45,15 +33,15 @@ export default function Signup() {
 
     switch (code) {
       case "auth/email-already-in-use":
-        return "Este e-mail já está em uso. Faça login ou use outro e-mail.";
+        return "Este e-mail ja esta em uso. Faca login ou use outro e-mail.";
       case "auth/invalid-email":
-        return "O e-mail informado é inválido.";
+        return "O e-mail informado e invalido.";
       case "auth/weak-password":
-        return "A senha precisa ter pelo menos 6 caracteres.";
+        return "A senha precisa conter no minimo 8 caracteres, 1 caracter especial.";
       case "auth/network-request-failed":
-        return "Falha na conexão. Verifique sua internet e tente novamente.";
+        return "Falha na conexao. Verifique sua internet e tente novamente.";
       case "auth/operation-not-allowed":
-        return "Esse tipo de cadastro não está habilitado no Firebase.";
+        return "Esse tipo de cadastro nao esta habilitado no Firebase.";
       default:
         return error?.message ?? "Erro desconhecido ao criar conta.";
     }
@@ -80,12 +68,19 @@ export default function Signup() {
   }
 
   function handlePress() {
-    if (!nome.trim()) {
-      Alert.alert("Digite seu nome!");
+    const erroCadastro = validarCadastro(
+      nome.trim(),
+      email.trim(),
+      senha,
+      confirmarSenha,
+    );
+
+    if (erroCadastro) {
+      Alert.alert("Erro", erroCadastro);
       return;
     }
+
     if (!verificationEmail()) return;
-    if (!verificationPassword()) return;
 
     handleRegister();
   }
@@ -130,7 +125,7 @@ export default function Signup() {
         </View>
 
         <Text style={styles.footerText}>
-          Já tem uma conta?
+          Ja tem uma conta?
           <Link href="/" style={styles.footerLink}>
             {" "}
             Entrar Aqui
