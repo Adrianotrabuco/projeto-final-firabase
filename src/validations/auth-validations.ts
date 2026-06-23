@@ -33,3 +33,5 @@ export function validarCadastro(
 
   return null;
 }
+
+export const validarCadastroUsuario = validarCadastro;

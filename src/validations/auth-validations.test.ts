@@ -1,5 +1,6 @@
-﻿import {
+import {
   validarCadastro,
+  validarCadastroUsuario,
   validarLogin,
   validarSenha,
 } from "./auth-validations";
@@ -63,6 +64,12 @@ describe("Validacoes de autenticacao", () => {
 
   test("deve exigir confirmacao de senha no cadastro", () => {
     expect(validarCadastro("Adriano", "teste@email.com", "Teste@123", "")).toBe(
+      "Preencha todos os campos",
+    );
+  });
+
+  test("deve exigir todos os campos no cadastro do usuario", () => {
+    expect(validarCadastroUsuario("", "", "", "")).toBe(
       "Preencha todos os campos",
     );
   });
