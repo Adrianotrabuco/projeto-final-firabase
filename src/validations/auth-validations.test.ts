@@ -46,4 +46,24 @@ describe("Validacoes de autenticacao", () => {
       validarCadastro("Adriano", "teste@email.com", "Teste@123", "Teste@123"),
     ).toBeNull();
   });
+
+  test("deve mostrar erro quando o e-mail do login estiver vazio", () => {
+    expect(validarLogin("", "12345678")).toBe("Preencha e-mail e senha");
+  });
+
+  test("deve mostrar erro quando a senha do login estiver vazia", () => {
+    expect(validarLogin("teste@email.com", "")).toBe(
+      "Preencha e-mail e senha",
+    );
+  });
+
+  test("deve aceitar senha com exatamente 8 caracteres e caractere especial", () => {
+    expect(validarSenha("Teste@12")).toBe(true);
+  });
+
+  test("deve exigir confirmacao de senha no cadastro", () => {
+    expect(validarCadastro("Adriano", "teste@email.com", "Teste@123", "")).toBe(
+      "Preencha todos os campos",
+    );
+  });
 });
