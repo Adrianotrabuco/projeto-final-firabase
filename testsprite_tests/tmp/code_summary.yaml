@@ -1,0 +1,133 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - React Native
+  - Expo
+  - Expo Router
+  - Firebase Authentication
+  - Firebase Firestore
+  - Jest
+  - jest-expo
+routes:
+  - path: /
+    file: src/app/index.tsx
+    auth_required: false
+    description: Login screen for existing users.
+  - path: /signup
+    file: src/app/signup.tsx
+    auth_required: false
+    description: Account creation screen.
+  - path: /home
+    file: src/app/home.tsx
+    auth_required: true
+    description: Authenticated home screen with navigation and logout.
+  - path: /cadastro
+    file: src/app/cadastro.tsx
+    auth_required: true
+    description: Car registration form.
+  - path: /listagem
+    file: src/app/listagem.tsx
+    auth_required: true
+    description: Car listing screen.
+features:
+  - name: User Login
+    description: Users sign in with email and password using Firebase Authentication.
+    files:
+      - src/app/index.tsx
+      - src/lib/firebase.ts
+      - src/components/Input.tsx
+      - src/components/Button.tsx
+    entry_route: /
+    user_interactions:
+      - Enter an email address.
+      - Enter a password.
+      - Tap Entrar.
+      - See validation alerts for missing or invalid credentials.
+      - Navigate to the home screen after successful login.
+    api_calls:
+      - method: Firebase SDK
+        endpoint: signInWithEmailAndPassword
+    auth_required: false
+  - name: User Signup
+    description: Users create a Firebase Authentication account with required name, email, password, and password confirmation fields.
+    files:
+      - src/app/signup.tsx
+      - src/validations/auth-validations.ts
+      - src/lib/firebase.ts
+      - src/components/Input.tsx
+      - src/components/Button.tsx
+    entry_route: /signup
+    user_interactions:
+      - Enter name, email, password, and password confirmation.
+      - Tap Cadastrar.
+      - See validation alerts for empty fields, invalid email, weak password, or mismatched confirmation.
+      - Return to the login screen after successful signup.
+    api_calls:
+      - method: Firebase SDK
+        endpoint: createUserWithEmailAndPassword
+    auth_required: false
+  - name: Authenticated Home
+    description: Authenticated users see their email, navigate to car registration/listing, or sign out.
+    files:
+      - src/app/home.tsx
+      - src/lib/firebase.ts
+    entry_route: /home
+    user_interactions:
+      - View current account email.
+      - Tap Ver listagem to open the car list.
+      - Tap Ir para cadastro to open the car registration form.
+      - Tap Sair to sign out and return to login.
+    api_calls:
+      - method: Firebase SDK
+        endpoint: onAuthStateChanged
+      - method: Firebase SDK
+        endpoint: signOut
+    auth_required: true
+  - name: Car Registration
+    description: Authenticated users save a new car with brand, model, and year in Firestore under their user document.
+    files:
+      - src/app/cadastro.tsx
+      - src/lib/firebase.ts
+    entry_route: /cadastro
+    user_interactions:
+      - Enter brand.
+      - Enter model.
+      - Enter year.
+      - Tap Salvar cadastro.
+      - See an alert when required fields are missing.
+      - See success feedback after Firestore save.
+      - Tap Voltar to return home.
+    api_calls:
+      - method: Firebase SDK
+        endpoint: onAuthStateChanged
+      - method: Firebase SDK
+        endpoint: addDoc users/{uid}/carros
+    auth_required: true
+  - name: Car Listing
+    description: Authenticated users view all cars loaded from Firestore collection group query ordered by creation date.
+    files:
+      - src/app/listagem.tsx
+      - src/lib/firebase.ts
+    entry_route: /listagem
+    user_interactions:
+      - Open the listing screen.
+      - View empty state when no cars are found.
+      - View car brand, model, year, creator email, and creation date when records exist.
+      - Tap Voltar to return home.
+    api_calls:
+      - method: Firebase SDK
+        endpoint: onAuthStateChanged
+      - method: Firebase SDK
+        endpoint: collectionGroup carros with onSnapshot
+    auth_required: true
+known_limitations:
+  - issue: Some validation helper tests reference sneakers while the current UI registers cars.
+    location: src/validations/tenis-validations.ts
+    impact: Test coverage includes legacy domain logic that is not wired to the current car registration UI.
+  - issue: Car year is required but not validated as a valid numeric year beyond numeric keyboard input.
+    location: src/app/cadastro.tsx
+    impact: Invalid year values may be saved if entered through paste or non-mobile input behavior.
+  - issue: Frontend testing of authenticated car flows requires valid Firebase credentials and Firestore access.
+    location: src/app/home.tsx
+    impact: Automated cloud tests may be limited without a seeded test account.

@@ -34,6 +34,16 @@ yarn-error.*
 .env*.local
 .env*
 
+# local MCP secrets
+.vscode/mcp.json
+
+# local Expo logs
+expo-web.*.log
+
+# local TestSprite logs
+testsprite_tests/tmp/mcp.log
+testsprite_tests/tmp/*.lock
+
 # typescript
 *.tsbuildinfo
 

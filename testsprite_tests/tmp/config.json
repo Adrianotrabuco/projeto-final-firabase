@@ -1,0 +1,8 @@
+{
+  "status": "commited",
+  "type": "frontend",
+  "serverMode": "development",
+  "serverPort": 55934,
+  "localEndpoint": "http://localhost:19006/",
+  "scope": "codebase"
+}

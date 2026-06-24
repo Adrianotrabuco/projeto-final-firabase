@@ -26,8 +26,28 @@ describe("Validacoes de autenticacao", () => {
     expect(validarSenha("12345678")).toBe(false);
   });
 
+  test("deve rejeitar senha vazia", () => {
+    expect(validarSenha("")).toBe(false);
+  });
+
+  test("deve aceitar senha com outro caractere especial permitido", () => {
+    expect(validarSenha("Senha#123")).toBe(true);
+  });
+
   test("deve exigir todos os campos no cadastro", () => {
     expect(validarCadastro("", "", "", "")).toBe("Preencha todos os campos");
+  });
+
+  test("deve exigir nome no cadastro", () => {
+    expect(validarCadastro("", "teste@email.com", "Teste@123", "Teste@123")).toBe(
+      "Preencha todos os campos",
+    );
+  });
+
+  test("deve exigir e-mail no cadastro", () => {
+    expect(validarCadastro("Adriano", "", "Teste@123", "Teste@123")).toBe(
+      "Preencha todos os campos",
+    );
   });
 
   test("deve validar se as senhas sao iguais", () => {

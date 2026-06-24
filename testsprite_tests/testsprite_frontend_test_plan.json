@@ -1,0 +1,724 @@
+[
+  {
+    "id": "TC001",
+    "title": "Register a car successfully",
+    "description": "This verifies that a signed-in user can save a new car record and see success feedback after submission.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car registration"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the brand field with a valid brand name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the model field with a valid model name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the year field with a valid year"
+      },
+      {
+        "type": "action",
+        "description": "Submit the car registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify success feedback is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved car record is available in the authenticated car flow"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Sign out and return to the login screen",
+    "description": "This test verifies that a signed-in user can sign out from home and return to the login screen.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Sign out from the home screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify protected home content is no longer shown"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Sign in successfully and view the authenticated home screen",
+    "description": "This verifies that an existing user can sign in and see the authenticated home screen with their current account email.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the home screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the current account email is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Navigate from home to car registration and back to login",
+    "description": "This verifies that a signed-in user can open car registration from home, return with Voltar, and sign out to reach the login screen.",
+    "category": "Authenticated Home",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car registration"
+      },
+      {
+        "type": "action",
+        "description": "Click the back control on the car registration screen"
+      },
+      {
+        "type": "action",
+        "description": "Click the sign out control"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify authenticated navigation is no longer available"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Save a new car successfully",
+    "description": "This test verifies that an authenticated user can submit brand, model, and year and see success feedback after the car is saved.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Open the car registration screen from home"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the brand field with a valid car brand"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the model field with a valid car model"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the year field with a valid year"
+      },
+      {
+        "type": "action",
+        "description": "Submit the car registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify success feedback is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the car registration was saved"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Create a new account successfully",
+    "description": "This verifies that a new user can complete signup and is returned to the login screen after account creation.",
+    "category": "User Signup",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a strong password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password confirmation field with the same password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new account can return to the login flow"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Create an account and reach the login screen",
+    "description": "This test verifies that a new user can sign up successfully and return to the login screen afterward.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a unique valid email"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a valid password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password confirmation field with the same password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new account can proceed to sign in"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "View saved car details in the listing",
+    "description": "This verifies that a signed-in user can see saved car cards with the expected details in the listing.",
+    "category": "Car Listing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car registration"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the brand field with a valid brand name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the model field with a valid model name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the year field with a valid year"
+      },
+      {
+        "type": "action",
+        "description": "Submit the car registration form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car listing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved car is displayed in the listing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the creator email and creation date are visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "View an empty car listing",
+    "description": "This verifies that a signed-in user can open the car listing and see an empty state when no cars are available.",
+    "category": "Car Listing",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car listing"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the car listing screen is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an empty state message is visible"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Reject invalid login credentials",
+    "description": "This verifies that signing in with invalid credentials is blocked and the user stays on the login screen.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with an invalid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a wrong password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a login validation alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen remains available"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC011",
+    "title": "Keep required car fields from submitting when incomplete",
+    "description": "This test verifies that leaving required car fields blank prevents submission and shows validation feedback.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Open the car registration screen from home"
+      },
+      {
+        "type": "action",
+        "description": "Leave one or more required car fields blank"
+      },
+      {
+        "type": "action",
+        "description": "Submit the car registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a validation alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the car is not saved"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC012",
+    "title": "Require car registration fields before saving",
+    "description": "This verifies that missing required car fields block submission and no car is saved.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to open car registration"
+      },
+      {
+        "type": "action",
+        "description": "Submit the car registration form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify car validation alerts are visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify success feedback is not visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC013",
+    "title": "Go back to home from car registration",
+    "description": "This test verifies that a signed-in user can use Voltar on the car registration screen to return to home.",
+    "category": "Car Registration",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Open the car registration screen from home"
+      },
+      {
+        "type": "action",
+        "description": "Return to the home screen"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the authenticated home screen is displayed"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC014",
+    "title": "Reject a weak password during signup",
+    "description": "This verifies that signup with a weak password is blocked and the account is not created.",
+    "category": "User Signup",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a weak password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password confirmation field with the same password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a password validation alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the signup form remains available"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC015",
+    "title": "Reject an invalid email during signup",
+    "description": "This verifies that signup with an invalid email is blocked and the user remains on the signup form.",
+    "category": "User Signup",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with an invalid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a strong password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password confirmation field with the same password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an email validation alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the signup form remains available"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC016",
+    "title": "Reject mismatched password confirmation during signup",
+    "description": "This verifies that signup is blocked when the password confirmation does not match the password.",
+    "category": "User Signup",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with a valid name"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with a valid email address"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with a strong password"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password confirmation field with a different password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a password confirmation validation alert is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the signup form remains available"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC017",
+    "title": "Show validation when signup fields are missing",
+    "description": "This verifies that submitting signup with missing required fields prevents account creation and shows validation alerts.",
+    "category": "User Signup",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /signup"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation alerts are visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the signup form remains available"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC018",
+    "title": "Require login fields before sign in",
+    "description": "This verifies that submitting the login form without credentials is blocked by validation.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify validation alerts are visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the login screen remains available"
+      }
+    ],
+    "priority": "Low"
+  }
+]
